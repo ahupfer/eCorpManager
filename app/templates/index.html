@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+<h1>Bootstrap starter template</h1>
+<p class="lead">Use this document as a way to quickly start any new project.
+<br>All you get is this text and a mostly barebones HTML document.</p>
+{% if current_user.is_authenticated %}
+  Hi {{ current_user.username }} !
+{% endif %}
+
+{% endblock %}
