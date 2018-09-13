@@ -15,6 +15,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(64), unique=True)
     password = db.Column(db.String(128))
 
+    # Relationship
+    evechars = db.relationship('EveChar', backref='evechar')
+
     def set_password(self, password):
         self.password = generate_password_hash(password)
 
@@ -31,14 +34,18 @@ class User(db.Model, UserMixin):
 # EvE Character Model
 
 class EveChar(db.Model):
+    __tablename__ = "evechars"
     character_id = db.Column(db.BigInteger,primary_key=True,autoincrement=False)
     character_owner_hash = db.Column(db.String(100))
     character_name = db.Column(db.String(200))
 
-    #sso Token stuf
+    # sso Token stuf
     access_token = db.Column(db.String(100))
     access_token_expires = db.Column(db.DateTime())
     refresh_token = db.Column(db.String(100))
+
+    # Relationship
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def get_id(self):
         return self.character_id
@@ -57,3 +64,6 @@ class EveChar(db.Model):
          self.access_token_expires = datetime.fromtimestamp(time.time() + token_response['expires_in'])
          if 'refresh_token' in token_response:
             self.refresh_token = token_response['refresh_token']
+
+    def __repr__(self):
+        return '<Char %r>' % self.character_name
