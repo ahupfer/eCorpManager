@@ -1,8 +1,15 @@
-{% extends 'base.html' %}
-{% block main_content %}
+{% extends "base.html" %}
 
-    <h1>Login</h1>
+{% block main_content %}
+    <h1>Register</h1>
     <form action="" method="post">
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}<br>
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
         <p>
             {{ form.email.label }}<br>
             {{ form.email(size=64) }}<br>
@@ -14,6 +21,13 @@
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}<br>
             {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password2.label }}<br>
+            {{ form.password2(size=32) }}<br>
+            {% for error in form.password2.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
