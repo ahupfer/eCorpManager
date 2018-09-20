@@ -6,6 +6,8 @@ from app import db
 from .. models import User
 from . import auth
 
+# login route for webapp users
+
 @auth.route('/login', methods=['POST', 'GET'])
 def login():
     form = LoginForm(request.form)
@@ -21,6 +23,8 @@ def login():
 
     return render_template('auth/login.html', form=form, current_user = current_user)
 
+# register route for webapp users
+
 @auth.route('/register', methods=['POST', 'GET'])
 def register():
     form = RegisterForm(request.form)
@@ -35,6 +39,7 @@ def register():
         return(url_for('auth.login'))
     return render_template('auth/register.html', title="Register", form=form)\
 
+# logout webapp users
 
 @auth.route('/logout')
 @login_required

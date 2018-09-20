@@ -26,16 +26,19 @@ def authorized():
     if isinstance(resp, Exception):
         return 'Access denied: error=%s' % str(resp)
 
-    session['evesso_token'] = (resp['access_token'], '')
+    # session['evesso_token'] = (resp['access_token'], '')
 
     verify = evesso.get('verify')
-    session['character'] = verify.data
 
-# check if EveChar already in the database
+    # TODO: do we need the access_token and the character in the session variable?
 
-    char = EveChar.query.filter_by(character_id = session['character']['CharacterID']).first()
+    # session['character'] = verify.data
 
-# if not save char into the database in realtion with the current user id
+    # check if EveChar already in the database
+
+    char = EveChar.query.filter_by(character_id = verify.data['CharacterID']).first()
+
+    # if not save char into the database in realtion with the current user id
 
     if char is None:
         char = EveChar(character_id=verify.data['CharacterID'],

@@ -2,9 +2,30 @@
 {% set active_page='home' %}
 {% block main_content %}
 
-<h1>Bootstrap starter template</h1>
-<p class="lead">Use this document as a way to quickly start any new project.
-<br>All you get is this text and a mostly barebones HTML document.</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+    </div>
+    <div class="col-sm">
+    </div>
+    <div class="col-sm">
+        {%if current_user.is_authenticated %}
+            <h2>Deine EvE Charakteren in der Corp</h2>
+        {% endif %}
+      <div class="container">
+        {% for char in chars %}
+        <div class="row">
+            <h3>{{ char.character_name }}</h3>
+        </div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 {% if current_user.is_authenticated %}
   Hi {{ current_user.username }} !
 {% endif %}
