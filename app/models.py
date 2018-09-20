@@ -39,7 +39,8 @@ class EveChar(db.Model):
     character_owner_hash = db.Column(db.String(100))
     character_name = db.Column(db.String(200))
 
-    # sso Token stuf
+    # sso Token stuff
+
     access_token = db.Column(db.String(100))
     access_token_expires = db.Column(db.DateTime())
     refresh_token = db.Column(db.String(100))
