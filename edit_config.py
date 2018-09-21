@@ -7,8 +7,8 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     FLASK_ENV = 'development'
     EVESSO = dict(
-        consumer_key='e6af6e9d4916455e86d924ed97044895',
-        consumer_secret='zX9tLWs2ykSu9VliH6XVp3Gw1VkpGRrJpFJV3wU6',
+        consumer_key='your_key',
+        consumer_secret='your_secret',
         base_url='https://login.eveonline.com/oauth/',
         access_token_url='/oauth/token',
         access_token_method='POST',
