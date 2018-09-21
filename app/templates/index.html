@@ -16,6 +16,7 @@
       <div class="container">
         {% for char in chars %}
         <div class="row">
+            <img src="https://image.eveonline.com/Character/{{ char.character_id }}_256.jpg" class="img-fluid" alt="Responsive image">
             <h3>{{ char.character_name }}</h3>
         </div>
           {% endfor %}

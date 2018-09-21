@@ -38,7 +38,7 @@ class EveChar(db.Model):
     character_id = db.Column(db.BigInteger,primary_key=True,autoincrement=False)
     character_owner_hash = db.Column(db.String(100))
     character_name = db.Column(db.String(200))
-
+# TODO: add owner hash
     # sso Token stuff
 
     access_token = db.Column(db.String(100))

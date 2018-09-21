@@ -13,9 +13,8 @@ class Config:
         access_token_url='/oauth/token',
         access_token_method='POST',
         authorize_url='/oauth/authorize',
-        request_token_params={'scope': 'esi-industry.read_character_mining.v1'}
+        request_token_params={'scope': ['esi-industry.read_character_mining.v1', 'esi-characters.read_corporation_roles.v1']}
     )
-
     @staticmethod
     def init_app(app):
         pass

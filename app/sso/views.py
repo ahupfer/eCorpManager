@@ -26,33 +26,41 @@ def authorized():
     if isinstance(resp, Exception):
         return 'Access denied: error=%s' % str(resp)
 
-    # session['evesso_token'] = (resp['access_token'], '')
+    session['evesso_token'] = (resp['access_token'], '')
 
     verify = evesso.get('verify')
 
     # TODO: do we need the access_token and the character in the session variable?
 
-    # session['character'] = verify.data
+    session['character'] = verify.data
+    session['access_token'] = resp['access_token']
 
     # check if EveChar already in the database
 
     char = EveChar.query.filter_by(character_id = verify.data['CharacterID']).first()
 
-    # if not save char into the database in realtion with the current user id
+    # if not save char into the database in relation with the current user id
 
     if char is None:
         char = EveChar(character_id=verify.data['CharacterID'],
                        character_name=verify.data['CharacterName'],
                        character_owner_hash=verify.data['CharacterOwnerHash'],
-                       access_token=resp['access_token'],
-                       refresh_token=resp['refresh_token'],
                        user_id=current_user.id
                        )
-        db.session.add(char)
-        db.session.commit()
+    else:
+        char.access_token=resp['access_token']
+        char.refresh_token=resp['refresh_token']
 
+    db.session.add(char)
+    db.session.commit()
+    print resp['access_token']
+    print verify.data
     return redirect(url_for('main.index'))
 
+@sso.route('/refresh')
+@login_required
+def refresh():
+    pass
 
 # once we've gotten a callback to oauth-response, we can get tokens
 # to access the API
