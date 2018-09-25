@@ -8,12 +8,11 @@ from ...models import EveChar
 @mining.route('/char', methods=['POST', 'GET'])
 @login_required
 def show_char_mining():
-
     url = 'https://esi.evetech.net/latest/characters/' \
           + str(session['character']['CharacterID']) + '/mining'
 
-    r = requests.get(url,{'token':  session['access_token']})
+    r = requests.get(url, {'token':  session['access_token']})
 
-    print r.url
+    print r.json()
 
     return 'char mining'

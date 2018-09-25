@@ -53,7 +53,7 @@ def authorized():
 
     db.session.add(char)
     db.session.commit()
-    print resp['access_token']
+    print resp
     print verify.data
     return redirect(url_for('main.index'))
 
