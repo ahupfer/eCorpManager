@@ -1,6 +1,9 @@
+import requests
+
 from flask import request, session, url_for, redirect
 from flask_login import login_required, current_user
 from app import oauth, db
+from config import Config
 from ..models import EveChar
 from . import sso
 
@@ -53,6 +56,9 @@ def authorized():
 
     db.session.add(char)
     db.session.commit()
+
+    session['refresh_token'] = resp['refresh_token']
+
     print resp
     print verify.data
     return redirect(url_for('main.index'))
@@ -60,7 +66,15 @@ def authorized():
 @sso.route('/refresh')
 @login_required
 def refresh():
-    pass
+    url = "https://login.eveonline.com/oauth/token"
+    r = requests.post(url, {'grant_type': 'refresh_token',
+                          'client_id': Config.EVESSO['consumer_key'],
+                          'client_secret': Config.EVESSO['consumer_secret'],
+                          'refresh_token': session['refresh_token']})
+    print r.json()
+    return "success"
+# "grant_type": "refresh_token", "client_id": "YOUR_CLIENT_ID", "client_secret": "YOUR_CLIENT_SECRET", "refresh_token": "YOUR_REFRESH_TOKEN"
+
 
 # once we've gotten a callback to oauth-response, we can get tokens
 # to access the API

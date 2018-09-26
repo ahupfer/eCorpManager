@@ -62,8 +62,12 @@ db.sqlite3
 
 # Flask stuff:
 instance/
+migrations/
 .webassets-cache
 config.py
+
+#git
+.gitignore
 
 # Scrapy stuff:
 .scrapy
