@@ -67,4 +67,29 @@ class EveChar(db.Model):
             self.refresh_token = token_response['refresh_token']
 
     def __repr__(self):
-        return '<Char %r>' % self.character_name
+        return '<Char %r>' % self.character_nam
+
+
+
+class CorpWallet(db.Model):
+    __tablename__ = 'corpwallet'
+    id = db.Column(db.Integer,primary_key=True,autoincrement=False,unique=True)
+
+    amount = db.Column(db.Integer)
+    balance = db.Column(db.Integer)
+    context_id = db.Column(db.Integer)
+    context_id_type = db.Column(db.String(100))
+    date = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    first_party_id = db.Column(db.Integer)
+    reason = db.Column(db.String(100))
+    # See description on https://esi.evetech.net
+    ref_type = db.Column(db.String(100))
+    second_party_id = db.Column(db.Integer)
+    tax = db.Column(db.Float)
+    tax_recevier_id = db.Column(db.Integer)
+
+
+
+    def __repr__(self):
+        return 'Wallet'
